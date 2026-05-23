@@ -20,7 +20,6 @@ function logout() {
 /* ── Constants ────────────────────────────────────────────────────────────── */
 const STATUS_LABELS  = ["Pending","Approved","Rejected","Shipped","Delivered","Cancelled"];
 const STATUS_CLASSES = ["badge-pending","badge-approved","badge-rejected","badge-shipped","badge-delivered","badge-cancelled"];
-const STATUS_ICONS   = ["⏳","✔","✖","🚚","📦","🚫"];
 
 /* ── State ────────────────────────────────────────────────────────────────── */
 let allOrders    = [];
@@ -42,7 +41,7 @@ function fmtMoney(cents) {
   return "$" + (cents / 100).toLocaleString("en-AU", { minimumFractionDigits:2, maximumFractionDigits:2 });
 }
 function statusBadge(s) {
-  return `<span class="badge ${STATUS_CLASSES[s]}">${STATUS_ICONS[s]} ${STATUS_LABELS[s]}</span>`;
+  return `<span class="badge ${STATUS_CLASSES[s]}">${STATUS_LABELS[s]}</span>`;
 }
 
 async function apiFetch(url, opts = {}) {
@@ -1174,12 +1173,12 @@ let notifList  = [];
 let notifOpen  = false;
 
 const NOTIF_ICONS = {
-  "order:created":  "📋",
-  "order:auto":     "🤖",
-  "order:approved": "✅",
-  "order:rejected": "❌",
-  "order:shipped":  "🚚",
-  "order:delivered":"📦"
+  "order:created":  "◼",
+  "order:auto":     "◎",
+  "order:approved": "✓",
+  "order:rejected": "✕",
+  "order:shipped":  "▶",
+  "order:delivered":"◉"
 };
 
 function toggleNotifPanel() {
@@ -1283,12 +1282,28 @@ document.addEventListener("click", e => {
   }
 });
 
+/* ── Theme toggle ────────────────────────────────────────────────────────── */
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("sx_theme", theme);
+  const btn = $("theme-toggle");
+  if (btn) btn.title = theme === "light" ? "Switch to dark mode" : "Switch to light mode";
+}
+
+$("theme-toggle").addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme");
+  applyTheme(current === "light" ? "dark" : "light");
+});
+
 /* ── Boot ────────────────────────────────────────────────────────────────── */
 (async () => {
+  // Apply saved theme
+  applyTheme(localStorage.getItem("sx_theme") || "dark");
+
   setupRoleUI();
   await checkChainStatus();
   setInterval(checkChainStatus, 15000);
   loadDashboard();
   apiFetch("/api/suppliers").then(d => { allSuppliers = d; }).catch(()=>{});
-  connectSSE(); // start real-time notifications
+  connectSSE();
 })();

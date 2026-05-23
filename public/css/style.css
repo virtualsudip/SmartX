@@ -1,6 +1,7 @@
 /* ── Reset & Variables ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Dark theme (default) */
 :root {
   --bg:        #0f172a;
   --surface:   #1e293b;
@@ -20,6 +21,64 @@
   --radius:    10px;
   --shadow:    0 4px 24px rgba(0,0,0,.35);
 }
+
+/* ── Light theme (must come AFTER :root to override) ─────────────────────── */
+[data-theme="light"] {
+  --bg:      #f1f5f9;
+  --surface: #ffffff;
+  --card:    #ffffff;
+  --border:  #e2e8f0;
+  --text:    #0f172a;
+  --muted:   #64748b;
+  --shadow:  0 4px 20px rgba(0,0,0,.08);
+}
+[data-theme="light"] body             { background: #f1f5f9; color: #0f172a; }
+[data-theme="light"] .sidebar         { background: #ffffff; border-right-color: #e2e8f0; }
+[data-theme="light"] .topbar          { background: #ffffff; border-bottom-color: #e2e8f0; }
+[data-theme="light"] .nav-item:hover  { background: rgba(99,102,241,.07); }
+[data-theme="light"] .nav-item.active { background: rgba(99,102,241,.12); }
+[data-theme="light"] .form-control    { background: #f8fafc; color: #0f172a; }
+[data-theme="light"] .table td,
+[data-theme="light"] .table th        { color: #0f172a; }
+[data-theme="light"] .table tr:hover td { background: rgba(0,0,0,.025); }
+[data-theme="light"] .card            { background: #ffffff; border-color: #e2e8f0; }
+[data-theme="light"] .kpi-card        { background: #ffffff; border-color: #e2e8f0; }
+[data-theme="light"] .chain-badge.connected    { background: #dcfce7; color: #16a34a; }
+[data-theme="light"] .chain-badge.disconnected { background: #fee2e2; color: #dc2626; }
+[data-theme="light"] .user-chip    { background: #f1f5f9; border-color: #e2e8f0; }
+[data-theme="light"] .notif-bell   { background: #f1f5f9; border-color: #e2e8f0; }
+[data-theme="light"] .theme-toggle { background: #f1f5f9; border-color: #e2e8f0; }
+[data-theme="light"] .modal        { background: #ffffff; }
+[data-theme="light"] .modal-overlay{ background: rgba(15,23,42,.35); }
+[data-theme="light"] .ftab         { background: #f1f5f9; color: #64748b; border-color: #e2e8f0; }
+[data-theme="light"] .ftab.active  { background: var(--primary); color: #fff; border-color: var(--primary); }
+[data-theme="light"] .search-input { background: #ffffff; color: #0f172a; border-color: #e2e8f0; }
+[data-theme="light"] .notif-panel  { background: #ffffff; }
+[data-theme="light"] .sidebar-brand{ border-bottom-color: #e2e8f0; }
+[data-theme="light"] .dash-action-card { border-color: #fbbf2460 !important; }
+[data-theme="light"] .tx-hash      { background: rgba(59,130,246,.06); color: #1d4ed8; }
+[data-theme="light"] .kpi-value    { color: #0f172a; }
+[data-theme="light"] .brand-name   { color: #0f172a; }
+[data-theme="light"] .page-title   { color: #0f172a; }
+[data-theme="light"] .sidebar-footer { border-top-color: #e2e8f0; }
+[data-theme="light"] .detail-value { color: #0f172a; }
+[data-theme="light"] .notif-item.unread { background: rgba(99,102,241,.06); }
+[data-theme="light"] .notif-msg    { color: #0f172a; }
+[data-theme="light"] .btn-ghost    { color: #0f172a; border-color: #e2e8f0; }
+[data-theme="light"] .btn-ghost:hover { border-color: var(--primary); }
+[data-theme="light"] .modal-header { color: #0f172a; }
+[data-theme="light"] .card-header  { color: #0f172a; }
+[data-theme="light"] label         { color: #475569; }
+
+/* ── Theme toggle button ──────────────────────────────────────────────────── */
+.theme-toggle {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 16px; font-weight: 700;
+  transition: all .15s; color: var(--muted); flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--primary); color: var(--primary); }
 
 html, body { height: 100%; font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; }
 
@@ -73,6 +132,9 @@ html, body { height: 100%; font-family: 'Segoe UI', system-ui, sans-serif; backg
   display: flex; align-items: center; justify-content: space-between;
   padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
   background: var(--surface); position: sticky; top: 0; z-index: 50;
+}
+.topbar-actions {
+  display: flex; flex-direction: row; align-items: center; gap: .5rem;
 }
 .page-title { font-size: 18px; font-weight: 700; }
 
