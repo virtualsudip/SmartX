@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(python3 -m pip install pdfplumber -q)",
+      "Bash(npm install *)",
+      "Bash(npx hardhat *)",
+      "Bash(echo \"Hardhat node PID: $!\")",
+      "Bash(node server/index.js)",
+      "Bash(echo \"Server PID: $!\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:3000/api/status)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s http://localhost:3000/api/inventory/alerts)",
+      "Bash(mkdir -p /Users/sudipbasnet/Desktop/SmartXX/.claude)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(npx hardhat node > /tmp/hardhat-node.log 2>&1 & *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"admin123\"}')",
+      "Bash(curl -s http://localhost:3000/api/orders)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"rohit\",\"password\":\"Rohit@123\"}')"
+    ]
+  }
+}

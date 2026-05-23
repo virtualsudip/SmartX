@@ -1,0 +1,8 @@
+node_modules/
+artifacts/
+cache/
+typechain-types/
+server/contract-address.json
+.env
+.DS_Store
+.claude/
